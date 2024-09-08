@@ -1,5 +1,7 @@
 import React from 'react';
-import './App.css';
+import './styles/App.css';
+import {BrowserRouter} from "react-router-dom";
+import AppRouter from "./components/AppRouter";
 
 function App() {
     fetch(`http://localhost:8000/advertisements`)
@@ -7,9 +9,9 @@ function App() {
         .then(data => console.log(data));
 
     return (
-        <div className="App">
-            Hello world
-        </div>
+        <BrowserRouter>
+            <AppRouter/>
+        </BrowserRouter>
     );
 }
 
