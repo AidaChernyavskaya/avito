@@ -3,7 +3,27 @@
   padding: 0
   box-sizing: border-box
 
-//.ant-menu-dark.ant-menu-horizontal >.ant-menu-item-selected,
-//.ant-menu-dark.ant-menu-horizontal >.ant-menu-item-selected:hover,
-//.ant-menu-dark>.ant-menu .ant-menu-item-selected
-//  background-color: rgba(169, 37, 112, 0.92)
+.advertisement
+  background: lightgrey
+  margin: 20px 10px 0
+  padding: 10px
+  display: grid
+  grid-template-columns: max-content auto
+  grid-column-gap: 20px
+  align-content: center
+  align-items: center
+  cursor: pointer
+  &_stats
+    display: grid
+    grid-template-columns: max-content max-content
+    grid-column-gap: 10px
+    &__elem
+      display: flex
+      justify-content: space-between
+      align-items: center
+
+.icon
+  margin-right: 10px
+
+h5:where(.css-dev-only-do-not-override-14i19y2).ant-typography
+  margin-bottom: 0

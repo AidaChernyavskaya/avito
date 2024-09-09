@@ -4,4 +4,34 @@
   box-sizing: border-box;
 }
 
+.advertisement {
+  background: lightgrey;
+  margin: 20px 10px 0;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: max-content auto;
+  grid-column-gap: 20px;
+  align-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.advertisement_stats {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  grid-column-gap: 10px;
+}
+.advertisement_stats__elem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+h5:where(.css-dev-only-do-not-override-14i19y2).ant-typography {
+  margin-bottom: 0;
+}
+
 /*# sourceMappingURL=App.css.map */
