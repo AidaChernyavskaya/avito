@@ -1,0 +1,27 @@
+.advertisement {
+  background: #e5e5e5;
+  margin: 20px 10px 0;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: max-content auto;
+  grid-column-gap: 20px;
+  align-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.advertisement_stats {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  grid-column-gap: 10px;
+}
+.advertisement_stats__elem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+/*# sourceMappingURL=AdsCard.module.css.map */
