@@ -5,6 +5,7 @@ import {Advertisement} from "../types";
 import AdsCard from "../components/advertisements/AdsCard/AdsCard";
 import {Link} from "react-router-dom";
 import {Button, Form, Input, Modal, Pagination, Select} from "antd";
+import ModalBox from "../components/library/ModalBox/ModalBox";
 
 const AllAdvertisements = () => {
     const [ads, setAds] = useState<Advertisement[]>([]);
@@ -33,16 +34,11 @@ const AllAdvertisements = () => {
     }
 
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-    const [form] = Form.useForm();
+
     const showModal = () => {
         setIsModalOpen(true);
     };
-    const handleOk = () => {
-        setIsModalOpen(false);
-    };
-    const handleCancel = () => {
-        setIsModalOpen(false);
-    };
+
 
     return (
         <div data-testid="ads-page">
@@ -54,32 +50,7 @@ const AllAdvertisements = () => {
                 />
                 <Button type={"primary"} onClick={showModal}>Создать объявление</Button>
             </div>
-            <Modal title="Создать объявление" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-                <Form form={form} wrapperCol={{offset: 2}} labelCol={{span: 5}} labelAlign={"left"}>
-                    <Form.Item label="Изображение" name="imageUrl">
-                        <Input />
-                    </Form.Item>
-
-                    <Form.Item
-                        label="Название" name="name"
-                        rules={[
-                            {required: true, message: 'Пожалуйста, введите название товара!',},
-                        ]}
-                    >
-                        <Input />
-                    </Form.Item>
-
-                    <Form.Item label="Описание" name="description">
-                        <Input.TextArea/>
-                    </Form.Item>
-
-                    <Form.Item label="Цена" name="price" rules={[
-                        {required: true, message: 'Пожалуйста, введите стоимость товара!',},
-                    ]}>
-                        <Input />
-                    </Form.Item>
-                </Form>
-            </Modal>
+            <ModalBox isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}/>
 
             {ads.map(el => (
                 <Link to={`/advertisements/${el.id}`} key={el.id}>
