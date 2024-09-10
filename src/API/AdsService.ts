@@ -2,18 +2,26 @@ import axios from "axios";
 import {Advertisement} from "../types";
 
 export default class AdsService {
-    static async getAll (perPage = 5, page = 1) {
-        const response = await axios.get(`http://localhost:8000/advertisements`, {
+    static async getAll (limit = 5, page = 1) {
+        return await axios.get(`http://localhost:8000/advertisements`, {
             params: {
-                _per_page: perPage,
+                _limit: limit,
                 _page: page,
             }
         });
-        return response.data;
     }
 
     static async getById (id: number) {
         const response = await axios.get(`http://localhost:8000/advertisements/${id}`);
+        return response.data;
+    }
+
+    static async getByName (name: string) {
+        const response = await axios.get(`http://localhost:8000/advertisements`, {
+            params: {
+                name_like: name
+            }
+        });
         return response.data;
     }
 
