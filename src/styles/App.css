@@ -32,4 +32,10 @@ a {
   background: #ececec;
 }
 
+.button_edit {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
 /*# sourceMappingURL=App.css.map */

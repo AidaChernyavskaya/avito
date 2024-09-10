@@ -3,7 +3,7 @@ import Navbar from "../components/library/Navbar/Navbar";
 import { Advertisement} from "../types";
 import AdsService from "../API/AdsService";
 import ImageIcon from "../static/image_icon.svg";
-import {Image, Typography} from "antd";
+import {Button, Image, Typography} from "antd";
 
 const getAdsId = () => {
     const pathname = window.location.pathname;
@@ -49,6 +49,10 @@ const Ads = () => {
                     </div>
                 </div>
             </div>
+            <div className={'button_edit'}>
+                <Button type={"primary"}  size={"large"} >Редактировать объявление</Button>
+            </div>
+
         </div>
     );
 };
