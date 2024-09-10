@@ -4,7 +4,7 @@ import AdsService from "../API/AdsService";
 import {Advertisement} from "../types";
 import AdsCard from "../components/advertisements/AdsCard/AdsCard";
 import {Link} from "react-router-dom";
-import {Pagination} from "antd";
+import {Pagination, Select} from "antd";
 
 const AllAdvertisements = () => {
     const [ads, setAds] = useState<Advertisement[]>([]);
@@ -14,7 +14,7 @@ const AllAdvertisements = () => {
 
     useEffect(() => {
         fetchAds(perPage, page);
-    }, []);
+    }, [page, perPage]);
 
     async function fetchAds (limit: number, page: number) {
         const response = await AdsService.getAll(limit, page);
@@ -25,7 +25,6 @@ const AllAdvertisements = () => {
 
     const changePage = (page: number) => {
         setPage(page);
-        fetchAds(perPage, page);
         // window.scrollTo(0, 0);
         window.scrollBy({
             top: -window.innerWidth,
@@ -36,6 +35,10 @@ const AllAdvertisements = () => {
     return (
         <div data-testid="ads-page">
             <Navbar/>
+            <Select
+                defaultValue={perPage} options={[{value: 3, label: 3},{value: 5, label: 5} ,{value: 10, label: 10}]}
+                onChange={value => setPerPage(value)}
+            />
             {ads.map(el => (
                 <Link to={`/advertisements/${el.id}`} key={el.id}>
                     <AdsCard advertisement={el}/>
