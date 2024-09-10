@@ -7,8 +7,11 @@ import {Link} from "react-router-dom";
 import {Button, Form, Input, Modal, Pagination, Select} from "antd";
 import ModalBox from "../components/library/ModalBox/ModalBox";
 
+
+
 const AllAdvertisements = () => {
     const [ads, setAds] = useState<Advertisement[]>([]);
+
     const [perPage, setPerPage] = useState<number>(5);
     const [page, setPage] = useState<number>(1);
     const [totalCount, setTotalCount] = useState<number>(0);
@@ -50,7 +53,7 @@ const AllAdvertisements = () => {
                 />
                 <Button type={"primary"} onClick={showModal}>Создать объявление</Button>
             </div>
-            <ModalBox isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}/>
+            <ModalBox isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} totalCount={totalCount}/>
 
             {ads.map(el => (
                 <Link to={`/advertisements/${el.id}`} key={el.id}>
