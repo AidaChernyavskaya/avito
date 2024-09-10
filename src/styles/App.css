@@ -12,4 +12,11 @@ a {
   text-decoration: none;
 }
 
+.options {
+  display: grid;
+  grid-template-columns: max-content max-content auto;
+  grid-column-gap: 10px;
+  margin: 20px 10px;
+}
+
 /*# sourceMappingURL=App.css.map */
