@@ -9,9 +9,9 @@ interface IAdsCard {
     advertisement: Advertisement;
 }
 
-const AdsCard: FC<IAdsCard> = ({advertisement}) => {
+const AdsCard: FC<IAdsCard> = ({advertisement, ...props}) => {
     return (
-        <div key={advertisement.id} className={styles.advertisement}>
+        <div className={styles.advertisement}>
             <Image
                 alt={'Фото товара'} title={'Фото товара'}
                 src={advertisement.imageUrl} fallback={ImageIcon}
