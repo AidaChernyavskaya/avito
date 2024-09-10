@@ -2,6 +2,7 @@ import React, {FC, useEffect, useState} from 'react';
 import {Button, Form, Input, InputNumber, Modal, Typography} from "antd";
 import {Advertisement} from "../../../types";
 import AdsService from "../../../API/AdsService";
+import AdsForm from "../AdsForm/AdsForm";
 
 interface IModalBox {
     isModalOpen: boolean,
@@ -72,12 +73,6 @@ const ModalBox: FC<IModalBox> = ({isModalOpen, setIsModalOpen, totalCount}) => {
         setIsModalOpen(false);
     };
 
-    const onChangePrice = (value: number | null) => {
-        if (value) {
-            setPrice(value);
-        }
-    }
-
     return (
         <Modal
             title="Создать объявление" open={isModalOpen}
@@ -87,33 +82,12 @@ const ModalBox: FC<IModalBox> = ({isModalOpen, setIsModalOpen, totalCount}) => {
                 <Button key="submit" type="primary" onClick={handleOk}>Сохранить</Button>,
             ]}
         >
-            <Form form={form} wrapperCol={{offset: 2}} labelCol={{span: 5}} labelAlign={"left"}>
-                <Form.Item label="Изображение" name="imageUrl">
-                    <Input placeholder={'Вставьте ссылку на изображение'} value={image} onChange={e => setImage(e.target.value)}/>
-                </Form.Item>
-
-                <Form.Item
-                    label="Название" name="name"
-                    rules={[
-                        {required: true, message: 'Пожалуйста, введите название товара!',},
-                    ]}
-                >
-                    <Input placeholder={'Введите наименование товара'} value={name} onChange={e => setName(e.target.value)}/>
-                </Form.Item>
-
-                <Form.Item label="Описание" name="description">
-                    <Input.TextArea placeholder={'Введите описание товара'} value={description} onChange={e => setDescription(e.target.value)}/>
-                </Form.Item>
-
-                <Form.Item label="Цена" name="price" rules={[
-                    {required: true, message: 'Пожалуйста, введите стоимость товара!',},
-                ]}>
-                    <InputNumber
-                        min={0} value={price} placeholder={'Введите стоимость'}
-                        onChange={onChangePrice} suffix={'₽'}
-                    />
-                </Form.Item>
-            </Form>
+            <AdsForm
+                image={image} setImage={setImage}
+                name={name} setName={setName}
+                description={description} setDescription={setDescription}
+                price={price} setPrice={setPrice} form={form}
+            />
         </Modal>
     );
 };
