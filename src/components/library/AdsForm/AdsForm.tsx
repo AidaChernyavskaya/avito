@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect} from 'react';
 import {Form, FormInstance, Input, InputNumber} from "antd";
 
 interface IAdsForm {
@@ -22,12 +22,12 @@ const AdsForm: FC<IAdsForm> = ({image, setImage, name, setName, description, set
 
     return (
         <Form form={form} wrapperCol={{offset: 2}} labelCol={{span: 5}} labelAlign={"left"}>
-            <Form.Item label="Изображение" name="imageUrl">
+            <Form.Item label="Изображение" name="imageUrl" initialValue={image}>
                 <Input placeholder={'Вставьте ссылку на изображение'} value={image} onChange={e => setImage(e.target.value)}/>
             </Form.Item>
 
             <Form.Item
-                label="Название" name="name"
+                label="Название" name="name" initialValue={name}
                 rules={[
                     {required: true, message: 'Пожалуйста, введите название товара!',},
                 ]}
@@ -35,11 +35,11 @@ const AdsForm: FC<IAdsForm> = ({image, setImage, name, setName, description, set
                 <Input placeholder={'Введите наименование товара'} value={name} onChange={e => setName(e.target.value)}/>
             </Form.Item>
 
-            <Form.Item label="Описание" name="description">
+            <Form.Item label="Описание" name="description" initialValue={description}>
                 <Input.TextArea placeholder={'Введите описание товара'} value={description} onChange={e => setDescription(e.target.value)}/>
             </Form.Item>
 
-            <Form.Item label="Цена" name="price" rules={[
+            <Form.Item label="Цена" name="price" initialValue={price} rules={[
                 {required: true, message: 'Пожалуйста, введите стоимость товара!',},
             ]}>
                 <InputNumber

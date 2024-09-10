@@ -34,4 +34,14 @@ export default class AdsService {
                 return false;
             });
     }
+
+    static async editData(adv: Advertisement) {
+        return await axios.put(`http://localhost:8000/advertisements/${adv.id}`, {
+            ...adv
+        })
+            .catch(function (error) {
+                console.log(error.message);
+                return false;
+            });
+    }
 };

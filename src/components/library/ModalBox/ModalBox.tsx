@@ -36,7 +36,7 @@ const ModalBox: FC<IModalBox> = ({isModalOpen, setIsModalOpen, totalCount}) => {
             likes: 0,
             views: 0,
             description,
-            image
+            imageUrl: image
         };
         form
             .validateFields()
