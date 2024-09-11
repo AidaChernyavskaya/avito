@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":[],"names":[],"mappings":"","file":"OrderCard.module.css"}
+{"version":3,"sourceRoot":"","sources":["OrderCard.module.sass"],"names":[],"mappings":"AAAA;EACE;EACA;EACA;EACA;EACA;;AACA;EACE;EACA;EACA;;AACA;EACE;;;AAEN;EACE;EACA","file":"OrderCard.module.css"}

@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 import AdsCard from "../../advertisements/AdsCard/AdsCard";
 import {Order} from "../../../types";
 import {transformDateFormat} from "../../../utils/dateFunctions";
+import styles from './OrderCard.module.css';
 
 interface IOrderCard {
     order: Order;
@@ -15,7 +16,7 @@ const OrderCard: FC<IOrderCard> = ({order}) => {
     const [isVisible, setIsVisible] = useState<boolean>(false);
 
     return (
-        <div className={'order'} key={order.id}>
+        <div className={styles.order} key={order.id}>
             <Typography.Title level={3}>Заказ N{order.id}</Typography.Title>
             <Typography.Text>Статус заказа: {ORDER_STATUS_RU[order.status]}</Typography.Text>
             <Typography.Text>Дата заказа: {transformDateFormat(order.createdAt)}</Typography.Text>
@@ -26,15 +27,15 @@ const OrderCard: FC<IOrderCard> = ({order}) => {
             <Typography.Text>Товаров в заказе: {countItemsInOrder(order.items)}</Typography.Text>
 
             {isVisible && order.items.map((item, index) => (
-                <div className={'order_ads_items'} key={index}>
-                    <Typography.Title level={5} className={'order_ads_items__title'}>Количество товаров: {item.count}</Typography.Title>
+                <div className={styles.order_ads_items} key={index}>
+                    <Typography.Title level={5} className={styles.order_ads_items__title}>Количество товаров: {item.count}</Typography.Title>
                     <Link to={`/advertisements/${item.id}`}>
                         <AdsCard advertisement={item}/>
                     </Link>
                 </div>
             ))}
 
-            <Button type={"primary"} className={'button_show_items'} onClick={() => setIsVisible(!isVisible)}>
+            <Button type={"primary"} className={styles.button_show_items} onClick={() => setIsVisible(!isVisible)}>
                 {isVisible ? 'Скрыть товары' : 'Показать товары'}
             </Button>
         </div>
