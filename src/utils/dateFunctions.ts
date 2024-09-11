@@ -6,4 +6,4 @@ export const transformDateFormat = (date: string): string => {
     return '';
 }
 
-module.exports = transformDateFormat;
+export default transformDateFormat;

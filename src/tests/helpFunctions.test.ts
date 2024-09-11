@@ -1,4 +1,4 @@
-const countItemsInOrder = require('../utils/helpFunctions');
+import countItemsInOrder from '../utils/helpFunctions';
 
 describe('Test Help Functions', () => {
     test('Correct value', () => {
@@ -28,4 +28,3 @@ describe('Test Help Functions', () => {
     })
 })
 
-export {}

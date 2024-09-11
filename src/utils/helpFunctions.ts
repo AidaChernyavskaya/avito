@@ -6,4 +6,4 @@ export function countItemsInOrder (items: OrderItem[]) {
     return count;
 }
 
-module.exports = countItemsInOrder;
+export default countItemsInOrder;

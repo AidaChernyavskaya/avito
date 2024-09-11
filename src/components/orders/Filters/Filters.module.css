@@ -12,15 +12,14 @@
     grid-row-gap: 15px;
     grid-column-gap: 5px;
   }
+  .filters .button {
+    grid-column: 1/-1;
+  }
 }
 @media (max-width: 350px) {
   .filters {
     grid-template-columns: auto;
   }
-}
-
-.button {
-  grid-column: 1/-1;
 }
 
 /*# sourceMappingURL=Filters.module.css.map */
