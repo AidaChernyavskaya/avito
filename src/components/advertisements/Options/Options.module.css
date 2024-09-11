@@ -1,0 +1,19 @@
+.options {
+  display: grid;
+  grid-template-columns: max-content max-content auto;
+  grid-template-rows: max-content;
+  grid-column-gap: 10px;
+  margin: 20px 10px;
+}
+@media (max-width: 600px) {
+  .options {
+    grid-template-columns: min-content auto;
+    grid-template-rows: max-content max-content;
+    grid-row-gap: 20px;
+  }
+  .options .options_search {
+    grid-column: 1/3;
+  }
+}
+
+/*# sourceMappingURL=Options.module.css.map */
