@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Navbar from "../components/library/Navbar/Navbar";
 import {Order, OrderItem, OrderStatus} from "../types";
 import OrdersService from "../API/OrdersService";
-import {Button, Typography} from "antd";
+import {Button, Select, Typography} from "antd";
 import AdsCard from "../components/advertisements/AdsCard/AdsCard";
 import {Link} from "react-router-dom";
 
@@ -21,6 +21,7 @@ const ORDER_STATUS_RU = ['Создан', 'Оплачен', 'Отправлен',
 const Orders = () => {
     const [ordersList, setOrdersList] = useState<Order[]>([]);
     const [isVisible, setIsVisible] = useState<boolean>(false);
+    const [status, setStatus] = useState<number | null>();
 
     useEffect(() => {
         fetchOrders();
@@ -31,9 +32,40 @@ const Orders = () => {
         setOrdersList(response);
     }
 
+    async function fetchOrdersByStatus () {
+        if (status) {
+            const response = await OrdersService.getByStatus(status - 1);
+            setOrdersList(response);
+        }
+    }
+
+    useEffect(() => {
+        if (status){
+            fetchOrdersByStatus()
+        } else {
+            fetchOrders();
+        }
+        console.log(status)
+    }, [status]);
+
+    const handleClick = () => {
+        setStatus(null);
+    }
+
     return (
         <div data-testid="orders-page">
             <Navbar/>
+
+            <Select
+                options={[{label: 'Создан', value: 1}, {label: 'Оплачен', value: 2}, {label: 'Получен', value: 5}]}
+                placeholder={'Выбор статуса'}
+                style={{width: 150}}
+                onChange={value => setStatus(value)}
+                value={status}
+
+            />
+            <Button type={'primary'} onClick={handleClick}>Сбросить фильтры</Button>
+
             {ordersList.map(order => (
                 <div className={'order'} key={order.id}>
                     <Typography.Title level={3}>Заказ N{order.id}</Typography.Title>
