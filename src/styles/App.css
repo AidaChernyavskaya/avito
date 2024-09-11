@@ -38,15 +38,6 @@ a {
   text-decoration: none;
 }
 
-.ads {
-  display: grid;
-  grid-template-columns: max-content auto;
-  grid-column-gap: 15px;
-  margin: 20px 10px;
-  padding: 15px 5px;
-  background: #ececec;
-}
-
 .button_edit {
   margin-top: 30px;
   display: flex;
