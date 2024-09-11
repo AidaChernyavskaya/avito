@@ -9,7 +9,7 @@ interface IAdsCard {
     advertisement: Advertisement;
 }
 
-const AdsCard: FC<IAdsCard> = ({advertisement, ...props}) => {
+const AdsCard: FC<IAdsCard> = ({advertisement}) => {
     return (
         <div className={styles.advertisement}>
             <Image

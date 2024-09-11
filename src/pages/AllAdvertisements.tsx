@@ -63,7 +63,7 @@ const AllAdvertisements = () => {
             <Pagination
                 align={'center'} defaultCurrent={1}
                 pageSize={limit} total={totalCount} responsive={true}
-                onChange={changePage}
+                onChange={changePage} className={'pagination'}
             />
         </div>
     );
