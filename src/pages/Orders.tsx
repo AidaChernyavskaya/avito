@@ -30,25 +30,37 @@ const Orders: FC = () => {
         }
     }
 
-    useEffect(() => {
-        fetchOrders();
-    }, [])
+    // useEffect(() => {
+    //     fetchOrders();
+    // }, [])
+    //
+    // useEffect(() => {
+    //     if (sortOrder) {
+    //         fetchOrdersByPrice();
+    //     } else {
+    //         fetchOrders();
+    //     }
+    // }, [sortOrder])
+    //
+    // useEffect(() => {
+    //     if (status){
+    //         fetchOrdersByStatus()
+    //     } else {
+    //         fetchOrders();
+    //     }
+    // }, [status]);
 
     useEffect(() => {
         if (sortOrder) {
             fetchOrdersByPrice();
-        } else {
-            fetchOrders();
         }
-    }, [sortOrder])
-
-    useEffect(() => {
-        if (status){
+        if (status) {
             fetchOrdersByStatus()
-        } else {
+        }
+        if (!sortOrder && !status) {
             fetchOrders();
         }
-    }, [status]);
+    }, [sortOrder, status])
 
     return (
         <div data-testid="orders-page">

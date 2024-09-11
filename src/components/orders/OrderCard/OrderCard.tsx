@@ -16,7 +16,7 @@ const OrderCard: FC<IOrderCard> = ({order}) => {
     const [isVisible, setIsVisible] = useState<boolean>(false);
 
     return (
-        <div className={styles.order} key={order.id}>
+        <div className={styles.order} key={order.id} data-testid="orders-item">
             <Typography.Title level={3}>Заказ N{order.id}</Typography.Title>
             <Typography.Text>Статус заказа: {ORDER_STATUS_RU[order.status]}</Typography.Text>
             <Typography.Text>Дата заказа: {transformDateFormat(order.createdAt)}</Typography.Text>
