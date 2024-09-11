@@ -4,7 +4,7 @@ import AdsService from "../API/AdsService";
 import {Advertisement} from "../types";
 import AdsCard from "../components/advertisements/AdsCard/AdsCard";
 import {Link} from "react-router-dom";
-import {Pagination} from "antd";
+import {Pagination, Typography} from "antd";
 import Options from "../components/advertisements/Options/Options";
 
 const AllAdvertisements = () => {
@@ -55,16 +55,22 @@ const AllAdvertisements = () => {
                 searchName={searchName} setSearchName={setSearchName}
                 totalCount={totalCount} handleClear={handleClear} handleSearch={handleSearch}
             />
-            {ads?.map(el => (
-                <Link to={`/advertisements/${el.id}`} key={el.id}>
-                    <AdsCard advertisement={el}/>
-                </Link>
-            ))}
-            <Pagination
-                align={'center'} defaultCurrent={1}
-                pageSize={limit} total={totalCount} responsive={true}
-                onChange={changePage} className={'pagination'}
-            />
+            {
+                ads.length === 0
+                    ? <Typography.Title level={3} className={'feedback'}>Не найдено</Typography.Title>
+                    : <div>
+                        {ads?.map(el => (
+                            <Link to={`/advertisements/${el.id}`} key={el.id}>
+                                <AdsCard advertisement={el}/>
+                            </Link>
+                        ))}
+                        <Pagination
+                            align={'center'} defaultCurrent={1}
+                            pageSize={limit} total={totalCount} responsive={true}
+                            onChange={changePage} className={'pagination'}
+                        />
+                    </div>
+            }
         </div>
     );
 };
