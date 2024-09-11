@@ -60,7 +60,7 @@ const AllAdvertisements = () => {
                     ? <Typography.Title level={3} className={'feedback'}>Не найдено</Typography.Title>
                     : <div>
                         {ads?.map(el => (
-                            <Link to={`/advertisements/${el.id}`} key={el.id}  data-testid="allAds-item">
+                            <Link to={`/advertisements/${el.id}`} key={el.id}>
                                 <AdsCard advertisement={el}/>
                             </Link>
                         ))}

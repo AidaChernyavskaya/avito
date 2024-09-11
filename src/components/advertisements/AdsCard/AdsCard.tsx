@@ -11,7 +11,7 @@ interface IAdsCard {
 
 const AdsCard: FC<IAdsCard> = ({advertisement}) => {
     return (
-        <div className={styles.advertisement}>
+        <div className={styles.advertisement} data-testid="allAds-item">
             <Image
                 alt={'Фото товара'} title={'Фото товара'}
                 src={advertisement.imageUrl} fallback={ImageIcon}

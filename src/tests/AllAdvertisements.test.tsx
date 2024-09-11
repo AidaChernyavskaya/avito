@@ -1,7 +1,9 @@
 import {render, screen} from "@testing-library/react";
 import axios from 'axios';
 import AllAdvertisements from "../pages/AllAdvertisements";
-import {MemoryRouter} from "react-router-dom";
+import {MemoryRouter, Route, Routes} from "react-router-dom";
+import Ads from "../pages/Ads";
+import userEvent from "@testing-library/user-event";
 
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
@@ -55,5 +57,20 @@ describe('Test AllAds', () => {
         expect(ads.length).toBe(2);
         expect(axios.get).toBeCalledTimes(1);
         screen.debug();
+    });
+    test('test redirect for more details', async () => {
+        mockedAxios.get.mockResolvedValue(response);
+        render(
+            <MemoryRouter initialEntries={['/advertisements']}>
+                <Routes>
+                    <Route path="/advertisements" element={<AllAdvertisements/>} />
+                    <Route path="/advertisements/:id" element={<Ads/>} />
+                </Routes>
+            </MemoryRouter>
+        );
+        const ads = await screen.findAllByTestId('allAds-item');
+        expect(ads.length).toBe(2);
+        userEvent.click(ads[0]);
+        expect(screen.getByTestId('advertisement-page')).toBeInTheDocument();
     });
 })
