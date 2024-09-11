@@ -21,7 +21,7 @@ const AdsForm: FC<IAdsForm> = ({image, setImage, name, setName, description, set
     }
 
     return (
-        <Form form={form} wrapperCol={{offset: 2}} labelCol={{span: 5}} labelAlign={"left"}>
+        <Form form={form} wrapperCol={{offset: 0}} labelCol={{span: 5}} labelAlign={"left"}>
             <Form.Item label="Изображение" name="imageUrl" initialValue={image}>
                 <Input placeholder={'Вставьте ссылку на изображение'} value={image} onChange={e => setImage(e.target.value)}/>
             </Form.Item>
