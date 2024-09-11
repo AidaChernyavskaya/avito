@@ -14,4 +14,14 @@ export default class OrdersService {
         });
         return response.data;
     }
+
+    static async getByPrice (order: string, field =  'total') {
+        const response = await axios.get(`http://localhost:8000/orders`, {
+            params: {
+                _sort: field,
+                _order: order,
+            }
+        });
+        return response.data;
+    }
 };

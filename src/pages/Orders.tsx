@@ -22,6 +22,7 @@ const Orders = () => {
     const [ordersList, setOrdersList] = useState<Order[]>([]);
     const [isVisible, setIsVisible] = useState<boolean>(false);
     const [status, setStatus] = useState<number | null>();
+    const [sortOrder, setSortOrder] = useState<number | null>();
 
     useEffect(() => {
         fetchOrders();
@@ -39,22 +40,46 @@ const Orders = () => {
         }
     }
 
+    async function fetchOrdersByPrice () {
+        if (sortOrder) {
+            const response = await OrdersService.getByPrice(sortOrder === 1 ? 'asc' : 'desc');
+            setOrdersList(response);
+        }
+    }
+
+    useEffect(() => {
+        if (sortOrder) {
+            fetchOrdersByPrice();
+        } else {
+            fetchOrders();
+        }
+    }, [sortOrder])
+
     useEffect(() => {
         if (status){
             fetchOrdersByStatus()
         } else {
             fetchOrders();
         }
-        console.log(status)
     }, [status]);
 
     const handleClick = () => {
         setStatus(null);
+        setSortOrder(null);
     }
 
     return (
         <div data-testid="orders-page">
             <Navbar/>
+
+            <Select
+                options={[{label: 'По возрастающей', value: 1}, {label: 'По убывающей', value: 2}]}
+                placeholder={'Сортировка по цене'}
+                style={{width: 150}}
+                onChange={value => setSortOrder(value)}
+                value={sortOrder}
+
+            />
 
             <Select
                 options={[{label: 'Создан', value: 1}, {label: 'Оплачен', value: 2}, {label: 'Получен', value: 5}]}
