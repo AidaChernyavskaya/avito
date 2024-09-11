@@ -15,7 +15,7 @@ const AdsCard: FC<IAdsCard> = ({advertisement, ...props}) => {
             <Image
                 alt={'Фото товара'} title={'Фото товара'}
                 src={advertisement.imageUrl} fallback={ImageIcon}
-                width={200} height={200}
+                className={styles.advertisement_img}
             />
             <div className={styles.advertisement_info}>
                 <Typography.Title level={3}>{advertisement.name}</Typography.Title>
