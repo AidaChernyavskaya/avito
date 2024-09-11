@@ -1,19 +1,15 @@
 import React, {FC, useEffect, useState} from 'react';
 import Navbar from "../components/library/Navbar/Navbar";
-import {Order, OrderItem} from "../types";
+import {Order} from "../types";
 import OrdersService from "../API/OrdersService";
-import {Button, Select, Typography} from "antd";
 import OrderCard from "../components/orders/OrderCard/OrderCard";
+import Filters from "../components/orders/Filters/Filters";
+import {Typography} from "antd";
 
 const Orders: FC = () => {
     const [ordersList, setOrdersList] = useState<Order[]>([]);
-
-    const [status, setStatus] = useState<number | null>();
-    const [sortOrder, setSortOrder] = useState<number | null>();
-
-    useEffect(() => {
-        fetchOrders();
-    }, [])
+    const [status, setStatus] = useState<number | null>(null);
+    const [sortOrder, setSortOrder] = useState<number | null>(null);
 
     async function fetchOrders () {
         const response = await OrdersService.getAll();
@@ -35,6 +31,10 @@ const Orders: FC = () => {
     }
 
     useEffect(() => {
+        fetchOrders();
+    }, [])
+
+    useEffect(() => {
         if (sortOrder) {
             fetchOrdersByPrice();
         } else {
@@ -50,37 +50,17 @@ const Orders: FC = () => {
         }
     }, [status]);
 
-    const handleClick = () => {
-        setStatus(null);
-        setSortOrder(null);
-    }
-
     return (
         <div data-testid="orders-page">
             <Navbar/>
-
-            <Select
-                options={[{label: 'По возрастающей', value: 1}, {label: 'По убывающей', value: 2}]}
-                placeholder={'Сортировка по цене'}
-                style={{width: 150}}
-                onChange={value => setSortOrder(value)}
-                value={sortOrder}
-
-            />
-
-            <Select
-                options={[{label: 'Создан', value: 1}, {label: 'Оплачен', value: 2}, {label: 'Получен', value: 5}]}
-                placeholder={'Выбор статуса'}
-                style={{width: 150}}
-                onChange={value => setStatus(value)}
-                value={status}
-
-            />
-            <Button type={'primary'} onClick={handleClick}>Сбросить фильтры</Button>
-
-            {ordersList.map(order => (
-                <OrderCard order={order} key={order.id}/>
-            ))}
+            <Filters sortOrder={sortOrder} setSortOrder={setSortOrder} status={status} setStatus={setStatus}/>
+            {
+                ordersList.length === 0
+                    ? <Typography.Title level={3} className={'feedback'}>Не найдено</Typography.Title>
+                    : ordersList.map(order => (
+                        <OrderCard order={order} key={order.id}/>
+                    ))
+            }
         </div>
     );
 };

@@ -34,6 +34,12 @@ h5:where(.css-dev-only-do-not-override-14i19y2).ant-typography {
   display: none;
 }
 
+@media (max-width: 400px) {
+  :where(.css-dev-only-do-not-override-14i19y2).ant-layout-header {
+    padding: 0 20px;
+  }
+}
+
 a {
   text-decoration: none;
 }
