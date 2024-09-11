@@ -40,7 +40,7 @@ const Options: FC<IOptions> = (
                     <Button type={"primary"} onClick={handleSearch}>Поиск</Button>
                 </Space.Compact>
             </div>
-            <ModalBox isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} totalCount={totalCount}/>
+            <ModalBox isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} totalCount={totalCount} title={'Создать объявление'}/>
         </div>
     );
 };

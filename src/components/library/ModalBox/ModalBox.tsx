@@ -1,25 +1,20 @@
 import React, {FC, useEffect, useState} from 'react';
-import {Button, Form, Input, InputNumber, Modal, Typography} from "antd";
+import {Button, Form, Modal} from "antd";
 import {Advertisement} from "../../../types";
 import AdsService from "../../../API/AdsService";
 import AdsForm from "../AdsForm/AdsForm";
+import {newAdvertisement} from "../../../utils/initializeObjects";
 
 interface IModalBox {
     isModalOpen: boolean,
     setIsModalOpen: Function,
     totalCount: number,
+    ads?: Advertisement,
+    setAds?: Function,
+    title: string,
 }
 
-const newAdvertisement: Advertisement = {
-    id: '0',
-    name: '',
-    price: 0,
-    createdAt: '',
-    views: 0,
-    likes: 0,
-}
-
-const ModalBox: FC<IModalBox> = ({isModalOpen, setIsModalOpen, totalCount}) => {
+const ModalBox: FC<IModalBox> = ({isModalOpen, setIsModalOpen, totalCount, ads, setAds, title}) => {
     const [form] = Form.useForm();
     const [image, setImage] = useState('');
     const [name, setName] = useState('');
@@ -28,25 +23,38 @@ const ModalBox: FC<IModalBox> = ({isModalOpen, setIsModalOpen, totalCount}) => {
     const [newAds, setNewAds] = useState<Advertisement>(newAdvertisement);
 
     const handleOk = () => {
-        const adv = {
-            id: String(totalCount + 1),
-            name,
-            price,
-            createdAt: new Date().toLocaleString(undefined, {year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', hour12: false, minute:'2-digit', second:'2-digit'}),
-            likes: 0,
-            views: 0,
-            description,
-            imageUrl: image
-        };
+        let adv: Advertisement;
+        if (ads) {
+            adv = {
+                ...ads,
+                name,
+                imageUrl: image,
+                description,
+                price
+            }
+        } else {
+            adv = {
+                id: String(totalCount + 1),
+                name,
+                price,
+                createdAt: new Date().toLocaleString(undefined, {year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', hour12: false, minute:'2-digit', second:'2-digit'}),
+                likes: 0,
+                views: 0,
+                description,
+                imageUrl: image
+            };
+        }
         form
             .validateFields()
             .then((values) => {
-                setNewAds(adv);
-                setPrice(0);
-                setName('');
-                setDescription('');
-                setImage('');
-                form.resetFields();
+                if (ads && setAds) {
+                    fetchEditAds(adv);
+                    setAds(adv);
+                } else {
+                    setNewAds(adv);
+                    form.resetFields();
+                }
+                setProperties(ads);
                 setIsModalOpen(false);
             })
             .catch((info) => {
@@ -60,22 +68,34 @@ const ModalBox: FC<IModalBox> = ({isModalOpen, setIsModalOpen, totalCount}) => {
         }
     }, [newAds])
 
+    useEffect(() => {
+        setProperties(ads);
+    }, [ads])
+
     async function fetchNewAds () {
         return await AdsService.sendData(newAds);
     }
 
+    async function fetchEditAds (newAds: Advertisement) {
+        return await AdsService.editData(newAds)
+    }
+
+    const setProperties = (ads?: Advertisement) => {
+        setImage(ads?.imageUrl ? ads.imageUrl : '');
+        setName(ads?.name ? ads.name : '');
+        setDescription(ads?.description ? ads.description : '');
+        setPrice(ads?.price ? ads.price : 0);
+    }
+
     const handleCancel = () => {
-        setPrice(0);
-        setName('');
-        setDescription('');
-        setImage('');
-        form.resetFields();
+        setProperties(ads);
+        if (!ads) {form.resetFields()}
         setIsModalOpen(false);
     };
 
     return (
         <Modal
-            title="Создать объявление" open={isModalOpen}
+            title={title} open={isModalOpen}
             onOk={handleOk} onCancel={handleCancel}
             footer={[
                 <Button key="back" onClick={handleCancel}>Назад</Button>,

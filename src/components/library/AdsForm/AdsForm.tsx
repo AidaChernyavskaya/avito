@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC} from 'react';
 import {Form, FormInstance, Input, InputNumber} from "antd";
 
 interface IAdsForm {
