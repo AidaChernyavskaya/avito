@@ -5,3 +5,5 @@ export function countItemsInOrder (items: OrderItem[]) {
     items.map(item => {count += item.count})
     return count;
 }
+
+module.exports = countItemsInOrder;
