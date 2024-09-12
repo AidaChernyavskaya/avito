@@ -9,7 +9,8 @@ const AppRouter = () => {
     return (
         <Routes>
             <Route path={"/"} element={<Layout/>}>
-                <Route index path={"advertisements"} element={<AllAdvertisements/>}/>
+                <Route index element={<AllAdvertisements/>}/>
+                <Route path={"advertisements"} element={<AllAdvertisements/>}/>
                 <Route path={"advertisements/:id"} element={<Ads/>}/>
                 <Route path={"orders"} element={<Orders/>}/>
                 <Route path="*" element={<Navigate replace to="/advertisements"/>}/>
