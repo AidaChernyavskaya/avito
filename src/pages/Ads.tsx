@@ -16,13 +16,14 @@ const Ads = () => {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
     useEffect(() => {
+        async function fetchAdvertisement () {
+            await AdsService.getById(getAdsId())
+                .then(response => { setAds(response.data) })
+                .catch(error => { alert(error.message) });
+        }
+
         fetchAdvertisement();
     }, [])
-
-    async function fetchAdvertisement () {
-        const response = await AdsService.getById(getAdsId());
-        setAds(response);
-    }
 
     const handleClick = () => {
         setIsModalOpen(true)

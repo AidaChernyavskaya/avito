@@ -33,8 +33,9 @@ const ModalBox: FC<IModalBox> = ({isModalOpen, setIsModalOpen, totalCount, ads, 
                 price
             }
         } else {
+            totalCount++;
             adv = {
-                id: String(totalCount + 1),
+                id: String(totalCount),
                 name,
                 price,
                 createdAt: String(new Date()),
@@ -46,7 +47,7 @@ const ModalBox: FC<IModalBox> = ({isModalOpen, setIsModalOpen, totalCount, ads, 
         }
         form
             .validateFields()
-            .then((values) => {
+            .then(() => {
                 if (ads && setAds) {
                     fetchEditAds(adv);
                     setAds(adv);
@@ -63,6 +64,11 @@ const ModalBox: FC<IModalBox> = ({isModalOpen, setIsModalOpen, totalCount, ads, 
     };
 
     useEffect(() => {
+        async function fetchNewAds () {
+            await AdsService.createAdvertisement(newAds)
+                .catch(error => { alert(error.message) });
+        }
+
         if (newAds.name.length !== 0) {
             fetchNewAds();
         }
@@ -72,12 +78,10 @@ const ModalBox: FC<IModalBox> = ({isModalOpen, setIsModalOpen, totalCount, ads, 
         setProperties(ads);
     }, [ads])
 
-    async function fetchNewAds () {
-        return await AdsService.sendData(newAds);
-    }
 
     async function fetchEditAds (newAds: Advertisement) {
-        return await AdsService.editData(newAds)
+        await AdsService.editAdvertisement(newAds)
+            .catch(error => { alert(error.message) });
     }
 
     const setProperties = (ads?: Advertisement) => {

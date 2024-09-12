@@ -10,46 +10,27 @@ const Orders: FC = () => {
     const [status, setStatus] = useState<number | null>(null);
     const [sortOrder, setSortOrder] = useState<number | null>(null);
 
-    async function fetchOrders () {
-        const response = await OrdersService.getAll();
-        setOrdersList(response);
-    }
-
-    async function fetchOrdersByStatus () {
-        if (status) {
-            const response = await OrdersService.getByStatus(status - 1);
-            setOrdersList(response);
-        }
-    }
-
-    async function fetchOrdersByPrice () {
-        if (sortOrder) {
-            const response = await OrdersService.getByPrice(sortOrder === 1 ? 'asc' : 'desc');
-            setOrdersList(response);
-        }
-    }
-
-    // useEffect(() => {
-    //     fetchOrders();
-    // }, [])
-    //
-    // useEffect(() => {
-    //     if (sortOrder) {
-    //         fetchOrdersByPrice();
-    //     } else {
-    //         fetchOrders();
-    //     }
-    // }, [sortOrder])
-    //
-    // useEffect(() => {
-    //     if (status){
-    //         fetchOrdersByStatus()
-    //     } else {
-    //         fetchOrders();
-    //     }
-    // }, [status]);
-
     useEffect(() => {
+        async function fetchOrders () {
+            await OrdersService.get()
+                .then(response => { setOrdersList(response.data) })
+                .catch(error => { alert(error.message) });
+
+        }
+        async function fetchOrdersByStatus () {
+            if (status){
+                await OrdersService.get({status: status - 1})
+                    .then(response => { setOrdersList(response.data) })
+                    .catch(error => { alert(error.message) });
+            }
+        }
+        async function fetchOrdersByPrice () {
+            if (sortOrder) {
+                await OrdersService.get({_sort: 'total', _order: sortOrder === 1 ? 'asc' : 'desc'})
+                    .then(response => { setOrdersList(response.data) })
+                    .catch(error => { alert(error.message) });
+            }
+        }
         if (sortOrder) {
             fetchOrdersByPrice();
         }

@@ -18,16 +18,21 @@ const AllAdvertisements = () => {
     }, [page, limit]);
 
     async function fetchAds (limit: number, page: number) {
-        const response = await AdsService.getAll(limit, page);
-        setAds(response.data);
-        const totalCount = response.headers['x-total-count'];
-        setTotalCount(totalCount);
+        await AdsService.getByParams({_limit: limit, _page: page})
+            .then(response => {
+                setAds(response.data);
+                setTotalCount(response.headers['x-total-count']);
+            })
+            .catch(error => { alert(error.message) });
     }
 
     async function fetchByName (name: string) {
-        const response = await AdsService.getByName(name);
-        setAds(response);
-        setTotalCount(response.length);
+        await AdsService.getByParams({name_like: name})
+            .then(response => {
+                setAds(response.data);
+                setTotalCount(response.data.length);
+            })
+            .catch(error => { alert(error.message) });
     }
 
     const changePage = (page: number) => {

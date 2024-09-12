@@ -20,3 +20,6 @@ export const newAdvertisement: Advertisement = {
     likes: 0,
     imageUrl: '',
 }
+
+export const advertisementsPath = 'advertisements';
+export const ordersPath = 'orders';
