@@ -1,10 +1,11 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} **/
-module.exports = {
-  testEnvironment: "node",
+export default {
+  testEnvironment: "jsdom",
   transform: {
     "^.+.tsx?$": ["ts-jest",{}],
+    "^.+.svg?$": "jest-transform-stub"
   },
-  setupFilesAfterEnv: [
-    '<rootDir>/src/setupTests.ts'
-  ]
+  moduleNameMapper: {
+    '\\.css$': 'identity-obj-proxy',
+  }
 };

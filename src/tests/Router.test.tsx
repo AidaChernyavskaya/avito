@@ -3,6 +3,7 @@ import App from "../App";
 import userEvent from '@testing-library/user-event';
 import {MemoryRouter} from "react-router-dom";
 import AppRouter from "../components/router/AppRouter";
+import '@testing-library/jest-dom'
 
 describe('Router test', () => {
     test('Correct links', async () => {
@@ -14,13 +15,9 @@ describe('Router test', () => {
         const adsLink = screen.getByTestId("ads-link");
         const ordersLink = screen.getByTestId("orders-link");
         userEvent.click(adsLink);
-        await waitFor(() => {
-            expect(screen.getByTestId("ads-page")).toBeInTheDocument();
-        })
+        expect(screen.getByTestId("ads-page")).toBeInTheDocument();
         userEvent.click(ordersLink);
-        await waitFor(() => {
-            expect(screen.getByTestId("orders-page")).toBeInTheDocument();
-        })
+        expect(screen.getByTestId("orders-page")).toBeInTheDocument();
     });
 
     test('Incorrect link', async () => {
@@ -29,8 +26,6 @@ describe('Router test', () => {
                 <AppRouter/>
             </MemoryRouter>
         );
-        await waitFor(() => {
-            expect(screen.getByTestId('ads-page')).toBeInTheDocument();
-        })
+        expect(screen.getByTestId('ads-page')).toBeInTheDocument();
     });
 })

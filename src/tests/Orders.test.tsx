@@ -2,6 +2,7 @@ import {render, screen, waitFor} from "@testing-library/react";
 import axios from 'axios';
 import {MemoryRouter} from "react-router-dom";
 import Orders from "../pages/Orders";
+import '@testing-library/jest-dom';
 
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;

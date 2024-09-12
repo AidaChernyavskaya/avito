@@ -4,6 +4,7 @@ import AllAdvertisements from "../pages/AllAdvertisements";
 import {MemoryRouter, Route, Routes} from "react-router-dom";
 import Ads from "../pages/Ads";
 import userEvent from "@testing-library/user-event";
+import '@testing-library/jest-dom';
 
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
