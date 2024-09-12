@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import Navbar from "../components/library/Navbar/Navbar";
 import AdsService from "../API/AdsService";
 import {Advertisement} from "../types";
 import AdsCard from "../components/advertisements/AdsCard/AdsCard";
@@ -49,7 +48,6 @@ const AllAdvertisements = () => {
 
     return (
         <div data-testid="ads-page">
-            <Navbar/>
             <Options
                 limit={limit} setLimit={setLimit}
                 searchName={searchName} setSearchName={setSearchName}

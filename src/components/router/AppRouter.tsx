@@ -1,14 +1,19 @@
 import React from 'react';
 import {Navigate, Route, Routes} from "react-router-dom";
-import {routes} from "./index";
+import Layout from "../library/Layout";
+import AllAdvertisements from "../../pages/AllAdvertisements";
+import Ads from "../../pages/Ads";
+import Orders from "../../pages/Orders";
 
 const AppRouter = () => {
     return (
         <Routes>
-            {routes.map(route =>
-                <Route path={route.path} element={route.element} key={route.path}/>
-            )}
-            <Route path="/*" element={<Navigate replace to="/advertisements"/>}/>
+            <Route path={"/"} element={<Layout/>}>
+                <Route index path={"advertisements"} element={<AllAdvertisements/>}/>
+                <Route path={"advertisements/:id"} element={<Ads/>}/>
+                <Route path={"orders"} element={<Orders/>}/>
+                <Route path="*" element={<Navigate replace to="/advertisements"/>}/>
+            </Route>
         </Routes>
     );
 };

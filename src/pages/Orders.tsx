@@ -1,5 +1,4 @@
 import React, {FC, useEffect, useState} from 'react';
-import Navbar from "../components/library/Navbar/Navbar";
 import {Order} from "../types";
 import OrdersService from "../API/OrdersService";
 import OrderCard from "../components/orders/OrderCard/OrderCard";
@@ -64,7 +63,6 @@ const Orders: FC = () => {
 
     return (
         <div data-testid="orders-page">
-            <Navbar/>
             <Filters sortOrder={sortOrder} setSortOrder={setSortOrder} status={status} setStatus={setStatus}/>
             {
                 ordersList.length === 0

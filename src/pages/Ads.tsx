@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import Navbar from "../components/library/Navbar/Navbar";
 import { Advertisement} from "../types";
 import AdsService from "../API/AdsService";
 import {Button} from "antd";
@@ -31,7 +30,6 @@ const Ads = () => {
 
     return (
         <div data-testid="advertisement-page">
-            <Navbar/>
             <AdsCardFull ads={ads}/>
             <div className={'button_edit'}>
                 <Button type={"primary"}  size={"large"} onClick={handleClick}>Редактировать объявление</Button>
