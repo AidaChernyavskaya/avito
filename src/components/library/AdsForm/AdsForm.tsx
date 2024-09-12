@@ -1,7 +1,7 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import {Form, FormInstance, Input, InputNumber} from "antd";
 
-interface IAdsForm {
+interface IProps {
     image: string;
     setImage: Function;
     name: string;
@@ -13,8 +13,8 @@ interface IAdsForm {
     form: FormInstance;
 }
 
-const AdsForm: FC<IAdsForm> = ({image, setImage, name, setName, description, setDescription, price, setPrice, form}) => {
-    const onChangePrice = (value: number | null) => {
+const AdsForm: FC<IProps> = ({image, setImage, name, setName, description, setDescription, price, setPrice, form}) => {
+    const handleChangePrice = (value: number | null) => {
         if (value) {
             setPrice(value);
         }
@@ -44,7 +44,7 @@ const AdsForm: FC<IAdsForm> = ({image, setImage, name, setName, description, set
             ]}>
                 <InputNumber
                     min={0} value={price} placeholder={'Введите стоимость'}
-                    onChange={onChangePrice} suffix={'₽'}
+                    onChange={handleChangePrice} suffix={'₽'}
                 />
             </Form.Item>
         </Form>

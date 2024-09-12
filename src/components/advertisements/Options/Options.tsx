@@ -3,7 +3,7 @@ import {Button, Input, Select, Space} from "antd";
 import ModalBox from "../../library/ModalBox/ModalBox";
 import styles from './Options.module.css';
 
-interface IOptions {
+interface IProps {
     limit: number;
     setLimit: Function;
     searchName: string;
@@ -13,7 +13,7 @@ interface IOptions {
     handleSearch: () => void;
 }
 
-const Options: FC<IOptions> = (
+const Options: FC<IProps> = (
     {limit, setLimit, searchName, setSearchName, totalCount, handleSearch, handleClear}
 ) => {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -40,7 +40,7 @@ const Options: FC<IOptions> = (
                     <Button type={"primary"} onClick={handleSearch}>Поиск</Button>
                 </Space.Compact>
             </div>
-            <ModalBox isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} totalCount={totalCount} title={'Создать объявление'}/>
+            <ModalBox isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} totalCount={totalCount}/>
         </div>
     );
 };

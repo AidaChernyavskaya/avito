@@ -5,11 +5,11 @@ import {Advertisement} from "../../../types";
 import styles from './AdsCardFull.module.css';
 import {transformDateFormat} from "../../../utils/dateFunctions";
 
-interface IAdsCardFull {
+interface IProps {
     ads: Advertisement;
 }
 
-const AdsCardFull: FC<IAdsCardFull> = ({ads}) => {
+const AdsCardFull: FC<IProps> = ({ads}) => {
     return (
         <div className={styles.ads}>
             <Image

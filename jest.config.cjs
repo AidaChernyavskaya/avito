@@ -4,6 +4,7 @@ module.exports = {
   transform: {
     "^.+.tsx?$": ["ts-jest",{}],
   },
+  transformIgnorePatterns: [ "node_modules/(?!axios)" ],
   setupFilesAfterEnv: [
     '<rootDir>/src/setupTests.ts'
   ]

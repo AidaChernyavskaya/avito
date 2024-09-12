@@ -3,24 +3,25 @@ import {Button, Form, Modal} from "antd";
 import {Advertisement} from "../../../types";
 import AdsService from "../../../API/AdsService";
 import AdsForm from "../AdsForm/AdsForm";
-import {newAdvertisement} from "../../../utils/constants";
+import {advertisementObj} from "../../../utils/constants";
 
-interface IModalBox {
+interface IProps {
     isModalOpen: boolean,
     setIsModalOpen: Function,
-    totalCount: number,
+    totalCount?: number,
     ads?: Advertisement,
     setAds?: Function,
-    title: string,
 }
 
-const ModalBox: FC<IModalBox> = ({isModalOpen, setIsModalOpen, totalCount, ads, setAds, title}) => {
+const ModalBox: FC<IProps> = (
+    { isModalOpen, setIsModalOpen, totalCount= 0, ads, setAds }
+) => {
     const [form] = Form.useForm();
     const [image, setImage] = useState('');
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState(0);
-    const [newAds, setNewAds] = useState<Advertisement>(newAdvertisement);
+    const [newAds, setNewAds] = useState<Advertisement>(advertisementObj);
 
     const handleOk = () => {
         let adv: Advertisement;
@@ -49,6 +50,10 @@ const ModalBox: FC<IModalBox> = ({isModalOpen, setIsModalOpen, totalCount, ads, 
             .validateFields()
             .then(() => {
                 if (ads && setAds) {
+                    const fetchEditAds = async (newAds: Advertisement) => {
+                        await AdsService.editAdvertisement(newAds)
+                            .catch(error => { alert(error.message) });
+                    }
                     fetchEditAds(adv);
                     setAds(adv);
                 } else {
@@ -78,17 +83,11 @@ const ModalBox: FC<IModalBox> = ({isModalOpen, setIsModalOpen, totalCount, ads, 
         setProperties(ads);
     }, [ads])
 
-
-    async function fetchEditAds (newAds: Advertisement) {
-        await AdsService.editAdvertisement(newAds)
-            .catch(error => { alert(error.message) });
-    }
-
-    const setProperties = (ads?: Advertisement) => {
-        setImage(ads?.imageUrl ? ads.imageUrl : '');
-        setName(ads?.name ? ads.name : '');
-        setDescription(ads?.description ? ads.description : '');
-        setPrice(ads?.price ? ads.price : 0);
+    const setProperties = (advertisement?: Advertisement) => {
+        setImage(advertisement?.imageUrl ? advertisement.imageUrl : '');
+        setName(advertisement?.name ? advertisement.name : '');
+        setDescription(advertisement?.description ? advertisement.description : '');
+        setPrice(advertisement?.price ? advertisement.price : 0);
     }
 
     const handleCancel = () => {
@@ -99,7 +98,7 @@ const ModalBox: FC<IModalBox> = ({isModalOpen, setIsModalOpen, totalCount, ads, 
 
     return (
         <Modal
-            title={title} open={isModalOpen}
+            title={`${ads ? 'Редактировать' : 'Создать'} объявление`} open={isModalOpen}
             onOk={handleOk} onCancel={handleCancel}
             footer={[
                 <Button key="back" onClick={handleCancel}>Назад</Button>,

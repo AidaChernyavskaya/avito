@@ -4,7 +4,7 @@ import AdsService from "../API/AdsService";
 import {Button} from "antd";
 import AdsCardFull from "../components/advertisements/AdsCardFull/AdsCardFull";
 import ModalBox from "../components/library/ModalBox/ModalBox";
-import {newAdvertisement} from "../utils/constants";
+import {advertisementObj} from "../utils/constants";
 
 const getAdsId = () => {
     const pathname = window.location.pathname;
@@ -12,8 +12,8 @@ const getAdsId = () => {
 }
 
 const Ads = () => {
-    const [ads, setAds] = useState<Advertisement>(newAdvertisement);
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+    const [ads, setAds] = useState<Advertisement>(advertisementObj);
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     useEffect(() => {
         async function fetchAdvertisement () {
@@ -37,8 +37,7 @@ const Ads = () => {
             </div>
 
             <ModalBox
-                isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}
-                totalCount={0} ads={ads} setAds={setAds} title={'Редактировать объявление'}
+                isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} ads={ads} setAds={setAds}
             />
         </div>
     );

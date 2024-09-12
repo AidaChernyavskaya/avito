@@ -5,11 +5,11 @@ import {EyeTwoTone, HeartTwoTone} from "@ant-design/icons";
 import {Advertisement} from "../../../types";
 import styles from "./AdsCard.module.css";
 
-interface IAdsCard {
+interface IProps {
     advertisement: Advertisement;
 }
 
-const AdsCard: FC<IAdsCard> = ({advertisement}) => {
+const AdsCard: FC<IProps> = ({advertisement}) => {
     return (
         <div className={styles.advertisement} data-testid="allAds-item">
             <Image

@@ -4,6 +4,7 @@ import OrdersService from "../API/OrdersService";
 import OrderCard from "../components/orders/OrderCard/OrderCard";
 import Filters from "../components/orders/Filters/Filters";
 import {Typography} from "antd";
+import {SORT_ORDER} from "../utils/constants";
 
 const Orders: FC = () => {
     const [ordersList, setOrdersList] = useState<Order[]>([]);
@@ -15,7 +16,6 @@ const Orders: FC = () => {
             await OrdersService.get()
                 .then(response => { setOrdersList(response.data) })
                 .catch(error => { alert(error.message) });
-
         }
         async function fetchOrdersByStatus () {
             if (status){
@@ -26,7 +26,7 @@ const Orders: FC = () => {
         }
         async function fetchOrdersByPrice () {
             if (sortOrder) {
-                await OrdersService.get({_sort: 'total', _order: sortOrder === 1 ? 'asc' : 'desc'})
+                await OrdersService.get({_sort: 'total', _order: SORT_ORDER.get(sortOrder)})
                     .then(response => { setOrdersList(response.data) })
                     .catch(error => { alert(error.message) });
             }
