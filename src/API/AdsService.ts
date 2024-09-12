@@ -1,21 +1,23 @@
 import {Advertisement} from "../types";
-import {axiosInstance} from "./config";
-import {advertisementsPath} from "../utils/constants";
+import {advertisementsPath, BASE_URL} from "../constants";
+import axios from "axios";
+
+const advertisementsUrl = `${BASE_URL}/${advertisementsPath}`;
 
 export default class AdsService {
     static async getByParams (params = {}) {
-        return axiosInstance.get(`/${advertisementsPath}`, { params: params });
+        return axios.get(advertisementsUrl, { params: params });
     }
 
     static async getById (id: number) {
-        return axiosInstance.get(`/${advertisementsPath}/${id}`);
+        return axios.get(`${advertisementsUrl}/${id}`);
     }
 
     static async createAdvertisement(adv: Advertisement) {
-        return axiosInstance.post(`/${advertisementsPath}`, {...adv})
+        return axios.post(advertisementsUrl, {...adv})
     }
 
     static async editAdvertisement(adv: Advertisement) {
-        return axiosInstance.put(`/${advertisementsPath}/${adv.id}`, {...adv})
+        return axios.put(`${advertisementsUrl}/${adv.id}`, {...adv})
     }
 };

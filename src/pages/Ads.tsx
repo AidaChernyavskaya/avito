@@ -4,7 +4,7 @@ import AdsService from "../API/AdsService";
 import {Button} from "antd";
 import AdsCardFull from "../components/advertisements/AdsCardFull/AdsCardFull";
 import ModalBox from "../components/library/ModalBox/ModalBox";
-import {advertisementObj} from "../utils/constants";
+import {advertisementObj} from "../constants";
 
 const getAdsId = () => {
     const pathname = window.location.pathname;

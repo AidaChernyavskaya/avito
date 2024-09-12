@@ -4,7 +4,7 @@ import OrdersService from "../API/OrdersService";
 import OrderCard from "../components/orders/OrderCard/OrderCard";
 import Filters from "../components/orders/Filters/Filters";
 import {Typography} from "antd";
-import {SORT_ORDER} from "../utils/constants";
+import {SORT_ORDER} from "../constants";
 
 const Orders: FC = () => {
     const [ordersList, setOrdersList] = useState<Order[]>([]);

@@ -3,7 +3,7 @@ import {Button, Form, Modal} from "antd";
 import {Advertisement} from "../../../types";
 import AdsService from "../../../API/AdsService";
 import AdsForm from "../AdsForm/AdsForm";
-import {advertisementObj} from "../../../utils/constants";
+import {advertisementObj} from "../../../constants";
 
 interface IProps {
     isModalOpen: boolean,

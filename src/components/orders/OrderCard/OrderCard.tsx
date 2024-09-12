@@ -1,6 +1,6 @@
 import React, {FC, useState} from 'react';
 import {Button, Typography} from "antd";
-import {ORDER_STATUS_RU} from "../../../utils/constants";
+import {ORDER_STATUS_RU} from "../../../constants";
 import {countItemsInOrder} from "../../../utils/helpFunctions";
 import {Link} from "react-router-dom";
 import AdsCard from "../../advertisements/AdsCard/AdsCard";

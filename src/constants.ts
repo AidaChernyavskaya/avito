@@ -1,4 +1,4 @@
-import {Advertisement} from "../types";
+import {Advertisement} from "./types";
 
 export const ORDER_STATUS_RU = new Map([
     [0, 'Создан'], [1, 'Оплачен'], [2, 'Отправлен'], [3, 'Доставлен'],
@@ -18,4 +18,6 @@ export const advertisementObj: Advertisement = {
 export const advertisementsPath = 'advertisements';
 export const ordersPath = 'orders';
 
-export const SORT_ORDER = new Map([[1, 'asc'], [2, 'desc']])
+export const SORT_ORDER = new Map([[1, 'asc'], [2, 'desc']]);
+
+export const BASE_URL = 'http://localhost:8000';
