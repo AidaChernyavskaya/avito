@@ -8,10 +8,11 @@
 
 ## Запуск локально
 
-1. В одном терминале ввести ```npm run server```.
-2. В другом ```npm start```
-3. Открыть ```http://localhost:3000/advertisements```
+1. ```npm install json-server```
+2. В одном терминале ввести ```npm run server```.
+3. В другом ```npm start```
+4. Открыть ```http://localhost:3000/advertisements```
 
 ## Запуск тестов
 
-```npm run tests```
+```npm run test```
