@@ -1,9 +1,7 @@
 import {OrderItem} from "../types";
 
 export function countItemsInOrder (items: OrderItem[]) {
-    let count = 0;
-    items.map(item => {count += item.count})
-    return count;
+    return items.reduce((acc, item) => acc + item.count, 0);
 }
 
 export default countItemsInOrder;
