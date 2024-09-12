@@ -1,6 +1,6 @@
 import React from 'react';
 import {Navigate, Route, Routes} from "react-router-dom";
-import {routes} from "./router";
+import {routes} from "./index";
 
 const AppRouter = () => {
     return (
